@@ -6,6 +6,58 @@
 
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
+    <table border=1 width=100%>
+      <tr align='center'>
+        <td>
+          name
+        </td>
+
+        <td>
+          photo
+        </td>
+
+        <td>
+          description
+        </td>
+        <td>
+          price
+        </td>
+        <td>
+          quantity
+        </td>
+        <td>
+          subtotal
+        </td>
+      </tr>
+      <% @order.line_items.each do |item|%>
+          <tr align='center'>
+            <td width=10%>
+              <%= item.product.name %>
+            </td>
+            <td width=10%>
+              <%= image_tag item.product.image.tiny %>
+            </td>
+
+            <td width=50%>
+                <%= item.product.description %>
+            </td>
+            <td width=10%>
+              $ <%= item.item_price %>
+            </td>
+
+            <td width=10%>
+              <%= item.quantity %>
+            </td>
+            <td width=10%>
+              $ <%= item.total_price %>
+            </td>
+          </tr>
+
+
+
+      <% end %>
+    </table>
+    <h4>Total Price: $ <%= @order.total_cents/100.00 %></h4>
   </div>
 
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
