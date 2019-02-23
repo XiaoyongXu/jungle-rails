@@ -22,7 +22,22 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
+
+
         </dl>
+
+        <%= form_for :review, url: "/products/#{@product.id}/reviews" do |f| %>
+          <li>Rating:<%= f.select :rating, options_for_select(["1", "2", "3","4","5"]) %></li>
+          <li>Comments:<%= f.text_area :description %></li>
+          <li><%= f.submit "Submit" %></li>
+        <% end %>
+        <h5>Rating</h5>
+        <% @product.reviews.reverse.each do |review| %>
+          <ul>
+            Rate: <%= review.rating%>
+            Comments: <%= review.description%>
+          </ul>
+        <% end%>
       </div>
     </div>
 
